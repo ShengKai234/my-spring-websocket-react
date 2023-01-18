@@ -130,6 +130,7 @@ const ChatRoom = () => {
             {userData.connected?
             <div className="chat-box">
                 <div className='member-list'>
+                    <p>{userData.username}</p>
                     <ul>
                         <li onClick={()=>[setTab("CHATROOM")]} className={`member ${tab==="CHATROOM" && "active"}`}>Chatroom</li>
                         {[...privateChats.keys()].map((name, index) => (
