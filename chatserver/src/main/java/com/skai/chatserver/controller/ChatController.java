@@ -17,6 +17,7 @@ public class ChatController {
     @MessageMapping("/message") // /app/message
     @SendTo("/chatroom/public")
     public Message receivePublicMessage(@Payload Message message) {
+        System.out.println("chatroom receive message: " + message.getMessage());
         return message;
     }
 
@@ -24,5 +25,13 @@ public class ChatController {
     public Message receivePrivateMessage(@Payload Message message) {
         simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(), "/private", message); // /user/David/private
         return message;
+    }
+
+    // Unit Test sample
+    @MessageMapping("/welcome")
+    @SendTo("/chatroom/public")
+    public String greeting(String payload) {
+        System.out.println("Generating new greeting message for " + payload);
+        return "Hello, " + payload + "!";
     }
 }
